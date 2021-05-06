@@ -1,0 +1,2 @@
+openni2/openni2_camera:openni2/openni2_launch:orthogonal-planes
+-DCATKIN_DEVEL_PREFIX=/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/install -G Unix Makefiles

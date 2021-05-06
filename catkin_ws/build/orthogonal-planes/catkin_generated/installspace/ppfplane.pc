@@ -1,0 +1,8 @@
+prefix=/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/install
+
+Name: ppfplane
+Description: Description of ppfplane
+Version: 0.0.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: 

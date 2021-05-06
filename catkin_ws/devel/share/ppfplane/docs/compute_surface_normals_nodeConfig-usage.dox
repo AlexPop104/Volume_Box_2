@@ -1,0 +1,7 @@
+\subsubsection usage Usage
+\verbatim
+<node name="orthogonal-planes" pkg="ppfplane" type="orthogonal-planes">
+  <param name="radius_norm" type="double" value="0.01" />
+</node>
+\endverbatim
+
