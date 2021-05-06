@@ -87,12 +87,38 @@ public:
 
   LineDetectNode()
   {
+    vis_pub = nh_.advertise<visualization_msgs::Marker>("/Volum_final", 0);
     pub_ = nh_.advertise<sensor_msgs::PointCloud2>("/lines_all",1);
+    pub2_ = nh_.advertise<sensor_msgs::PointCloud2>("/lines_final",1);
     sub_ = nh_.subscribe ("/norm_out", 1,  &LineDetectNode::cloudCallback, this);
     config_server_.setCallback(boost::bind(&LineDetectNode::dynReconfCallback, this, _1, _2));
   }
 
   ~LineDetectNode() {}
+
+  void
+  set_marker(visualization_msgs::Marker &marker)
+  {
+    marker.header.stamp = ros::Time::now();
+    marker.pose.position.x = 1;
+    marker.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+    marker.action = visualization_msgs::Marker::ADD;
+
+    marker.pose.position.y = 1;
+    marker.pose.position.z = 1;
+    marker.pose.orientation.x = 0.0;
+    marker.pose.orientation.y = 0.0;
+    marker.pose.orientation.z = 0.0;
+    marker.pose.orientation.w = 1.0;
+    marker.scale.x = 1;
+    marker.scale.y = 0.1;
+    marker.scale.z = 0.1;
+    marker.color.a = 1.0; // Don't forget to set the alpha! Otherwise it is invisible
+    marker.color.r = 0.0;
+    marker.color.g = 1.0;
+    marker.color.b = 0.0;
+    marker.lifetime = ros::Duration();
+  }
 
   void
   dynReconfCallback(ppfplane::line_detect_nodeConfig &config, uint32_t level)
@@ -107,6 +133,8 @@ public:
   void
   cloudCallback(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
   {
+
+    std::stringstream ss;
     pcl::PointCloud<pcl::PointNormal> cloud_Test;
     pcl::fromROSMsg(*cloud_msg, cloud_Test);
     
@@ -365,13 +393,13 @@ public:
         final_lines.push_back(new_lines[i]);
         final_lines.push_back(new_lines[i+1]);
         final_lines.push_back(new_lines[i+2]);
-        std::cout<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" cm^3"<<'\n';
-
+        std::cout<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3"<<'\n';
+        ss<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3"<<'\n';
        
 
-        std::cout<< "distance1= "<<Volume_edge[i] <<" cm"<<'\n';
-        std::cout<< "distance2= "<<Volume_edge[i+1]<<" cm" <<'\n';
-        std::cout<< "distance3= "<<Volume_edge[i+2]<<" cm" <<'\n';
+        std::cout<< "distance1= "<<Volume_edge[i] <<" m"<<'\n';
+        std::cout<< "distance2= "<<Volume_edge[i+1]<<" m" <<'\n';
+        std::cout<< "distance3= "<<Volume_edge[i+2]<<" m" <<'\n';
         
         std::cout<<'\n';
 
@@ -393,7 +421,7 @@ public:
 
   pcl::PointXYZ p;
   if(lines.size()>0){
-    for(int i = 0; i < lines.size(); i=i+3) {
+    for(int i = 0; i < lines.size(); i=i+1) {
       p.x = lines[i][0];
       p.y = lines[i][1];
       p.z = lines[i][2];
@@ -414,6 +442,34 @@ public:
 
   }
 
+  pcl::PointCloud<pcl::PointXYZ>::Ptr points_final_lines(new pcl::PointCloud<pcl::PointXYZ>);
+
+  if(final_lines.size()>0){
+    for(int i = 0; i < final_lines.size(); i=i+1) {
+      p.x = final_lines[i][0];
+      p.y = final_lines[i][1];
+      p.z = final_lines[i][2];
+
+      points_final_lines->points.push_back(p);
+
+       p.x = final_lines[i][3];
+       p.y = final_lines[i][4];
+       p.z = final_lines[i][5];
+
+      points_final_lines->points.push_back(p);
+  }
+
+   points_final_lines->width = points_final_lines->points.size();
+   points_final_lines->height = 1;
+   points_final_lines->points.resize(points_final_lines->width * points_final_lines->height);
+   points_final_lines->is_dense = false;
+
+   std::cout<<"Nr lines"<<points_final_lines->size()<<'\n';
+
+  }
+
+
+
    std::stringstream header_camera;
     header_camera << "camera_depth_optical_frame";
 
@@ -423,6 +479,26 @@ public:
     
     tempROSMsg.header.frame_id = header_camera.str();
     pub_.publish(tempROSMsg);
+
+    sensor_msgs::PointCloud2 tempROSMsg2;
+    pcl::toROSMsg(*points_final_lines, tempROSMsg2);
+
+    
+    tempROSMsg.header.frame_id = header_camera.str();
+    pub2_.publish(tempROSMsg2);
+
+
+
+    
+
+    
+
+    visualization_msgs::Marker marker;
+    marker.header.frame_id = header_camera.str();
+    marker.text = ss.str();
+    set_marker(marker);
+
+    vis_pub.publish(marker);
 
 
     
@@ -445,6 +521,8 @@ private:
   ros::NodeHandle nh_;
   ros::Subscriber sub_;
   ros::Publisher pub_;
+  ros::Publisher pub2_;
+  ros::Publisher vis_pub;
   dynamic_reconfigure::Server<ppfplane::line_detect_nodeConfig> config_server_;
 
   int min_votes ;
