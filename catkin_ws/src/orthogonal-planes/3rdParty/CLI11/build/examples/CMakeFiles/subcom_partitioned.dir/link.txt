@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/subcom_partitioned.dir/subcom_partitioned.cpp.o  -o subcom_partitioned 

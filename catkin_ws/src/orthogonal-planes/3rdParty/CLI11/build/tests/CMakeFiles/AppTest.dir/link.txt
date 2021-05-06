@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/AppTest.dir/AppTest.cpp.o  -o AppTest libcatch_main.a 

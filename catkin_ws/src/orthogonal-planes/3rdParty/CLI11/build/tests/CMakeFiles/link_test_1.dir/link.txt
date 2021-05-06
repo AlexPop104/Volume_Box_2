@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblink_test_1.a  CMakeFiles/link_test_1.dir/link_test_1.cpp.o
+/usr/bin/ranlib liblink_test_1.a

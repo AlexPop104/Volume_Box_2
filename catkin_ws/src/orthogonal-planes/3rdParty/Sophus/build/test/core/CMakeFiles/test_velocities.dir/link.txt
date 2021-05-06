@@ -1,0 +1,1 @@
+/usr/bin/c++   -Wall -Werror -Wextra -std=c++11 -Wno-deprecated-declarations -ftemplate-backtrace-limit=0 -O3   CMakeFiles/test_velocities.dir/test_velocities.cpp.o  -o test_velocities /usr/local/lib/libceres.a /usr/lib/x86_64-linux-gnu/libglog.so /usr/lib/x86_64-linux-gnu/libgflags.so.2.2.1 -lpthread 

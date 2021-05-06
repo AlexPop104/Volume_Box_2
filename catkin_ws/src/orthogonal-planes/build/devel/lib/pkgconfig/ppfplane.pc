@@ -1,0 +1,8 @@
+prefix=/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/src/orthogonal-planes/build/devel
+
+Name: ppfplane
+Description: Description of ppfplane
+Version: 0.0.0
+Cflags: -I/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/src/orthogonal-planes/build/devel/include
+Libs: -L${prefix}/lib 
+Requires: 

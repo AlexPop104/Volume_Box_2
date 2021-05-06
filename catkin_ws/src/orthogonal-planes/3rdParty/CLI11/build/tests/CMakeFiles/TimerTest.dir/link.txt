@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/TimerTest.dir/TimerTest.cpp.o  -o TimerTest libcatch_main.a 

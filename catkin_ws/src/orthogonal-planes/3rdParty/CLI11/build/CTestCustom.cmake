@@ -1,0 +1,1 @@
+set(CTEST_CUSTOM_PRE_TEST "/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/src/orthogonal-planes/3rdParty/CLI11/build/informational")

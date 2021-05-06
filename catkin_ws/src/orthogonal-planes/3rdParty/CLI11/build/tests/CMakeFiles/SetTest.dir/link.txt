@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/SetTest.dir/SetTest.cpp.o  -o SetTest libcatch_main.a 

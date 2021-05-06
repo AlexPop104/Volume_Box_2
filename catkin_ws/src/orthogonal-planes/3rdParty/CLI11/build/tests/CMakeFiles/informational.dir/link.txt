@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/informational.dir/informational.cpp.o  -o ../informational 

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/prefix_command.dir/prefix_command.cpp.o  -o prefix_command 

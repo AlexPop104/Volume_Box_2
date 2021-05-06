@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Categories=Utility
+Name=PangoPlotter
+GenericName=Plotter
+Comment=View CSV data series
+Exec=/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/src/orthogonal-planes/3rdParty/Pangolin/build/tools/Plotter/Plotter %U
+TryExec=/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/src/orthogonal-planes/3rdParty/Pangolin/build/tools/Plotter/Plotter
+Icon=application-x-pango
+Terminal=false
+StartupNotify=false
+MimeType=text/csv;text/comma-separated-values;application/x-pangoplot;application/csv

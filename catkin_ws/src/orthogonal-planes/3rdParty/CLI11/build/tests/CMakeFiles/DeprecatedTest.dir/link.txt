@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/DeprecatedTest.dir/DeprecatedTest.cpp.o  -o DeprecatedTest libcatch_main.a 

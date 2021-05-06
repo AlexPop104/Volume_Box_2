@@ -1,0 +1,1 @@
+/usr/bin/x86_64-linux-gnu-g++-7 -fPIC -g  -shared -Wl,-soname,libtinyply.so -o libtinyply.so CMakeFiles/tinyply.dir/3rdParty/tinyply/tinyply/tinyply.cpp.o 

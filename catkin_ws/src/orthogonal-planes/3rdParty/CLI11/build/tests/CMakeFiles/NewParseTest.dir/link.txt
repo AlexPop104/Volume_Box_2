@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/NewParseTest.dir/NewParseTest.cpp.o  -o NewParseTest libcatch_main.a 

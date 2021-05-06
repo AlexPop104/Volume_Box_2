@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/SubcommandTest.dir/SubcommandTest.cpp.o  -o SubcommandTest libcatch_main.a 

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/TransformTest.dir/TransformTest.cpp.o  -o TransformTest libcatch_main.a 

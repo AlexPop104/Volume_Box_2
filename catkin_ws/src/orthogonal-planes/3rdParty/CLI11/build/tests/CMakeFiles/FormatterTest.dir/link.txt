@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/FormatterTest.dir/FormatterTest.cpp.o  -o FormatterTest libcatch_main.a 

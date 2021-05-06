@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/subcommand_main.dir/subcommand_main.cpp.o CMakeFiles/subcommand_main.dir/subcommand_a.cpp.o  -o subcommand_main 

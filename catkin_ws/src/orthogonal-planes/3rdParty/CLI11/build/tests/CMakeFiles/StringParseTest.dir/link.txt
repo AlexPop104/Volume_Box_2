@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/StringParseTest.dir/StringParseTest.cpp.o  -o StringParseTest libcatch_main.a 

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/subcom_help.dir/subcom_help.cpp.o  -o subcom_help 

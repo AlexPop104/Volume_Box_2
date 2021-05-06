@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/ConfigFileTest.dir/ConfigFileTest.cpp.o  -o ConfigFileTest libcatch_main.a 
