@@ -306,6 +306,29 @@ devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libboost_date_tim
 devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libpthread.so
 devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so.0.4
+devel/lib/ppfplane/line_detect_node: libtinyply.so
+devel/lib/ppfplane/line_detect_node: devel/lib/libvis_lib.so
+devel/lib/ppfplane/line_detect_node: devel/lib/libgraph_lib.so
+devel/lib/ppfplane/line_detect_node: devel/lib/libppf_lib.so
+devel/lib/ppfplane/line_detect_node: /home/alex-pop/Desktop/Doctorat/Side_projects/orthogonal-planes/3rdParty/Pangolin/build/src/libpangolin.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libGLX.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libGLU.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libGLEW.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libX11.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libXext.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libGLX.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libGLU.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libGLEW.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libX11.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libXext.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libz.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libpng.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libIlmImf.so
+devel/lib/ppfplane/line_detect_node: /usr/local/lib/libceres.a
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libglog.so
+devel/lib/ppfplane/line_detect_node: /usr/lib/x86_64-linux-gnu/libgflags.so.2.2.1
 devel/lib/ppfplane/line_detect_node: CMakeFiles/line_detect_node.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/src/orthogonal-planes/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable devel/lib/ppfplane/line_detect_node"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/line_detect_node.dir/link.txt --verbose=$(VERBOSE)

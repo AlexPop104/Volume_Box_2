@@ -229,7 +229,7 @@ Visualization Manager:
       Marker Topic: /Nr_of_planes
       Name: Marker
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/Marker
@@ -405,7 +405,7 @@ Visualization Manager:
       Marker Topic: /Volume_Error
       Name: Marker
       Namespaces:
-        "": true
+        {}
       Queue Size: 100
       Value: true
   Enabled: true

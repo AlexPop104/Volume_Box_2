@@ -129,7 +129,11 @@ target_link_libraries(trianglemesh_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} $
 #target_link_libraries(compute_volume_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(compute_surface_normals_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(Lines_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
-target_link_libraries(line_detect_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
+
+target_link_libraries(line_detect_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES} ${PLY_PPDetectRefine} tinyply
+vis_lib # links to Pangolin_LIBRARIES
+graph_lib # links to CERES_LIBRARIES
+ppf_lib)
 
 
 add_dependencies(voxel_filter_node ${PROJECT_NAME}_gencfg)
