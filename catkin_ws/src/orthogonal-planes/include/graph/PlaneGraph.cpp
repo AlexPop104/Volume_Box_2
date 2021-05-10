@@ -279,6 +279,9 @@ void PlaneGraph::go_thr_pcl(const std::vector<Eigen::Vector3f>& points, const st
     const size_t num_points = points.size();
     labeled = std::vector<Eigen::Matrix<float, 6, 1>>(num_points);
 
+   // std::cout<<"I am Alive 2"<<'\n';
+    //std::cout<<"Nr of vertices"<<vertices_.size()<<"\n";
+
     for (size_t k = 0; k < num_points; ++k) {
 
         //! For each point in the scene
@@ -287,26 +290,28 @@ void PlaneGraph::go_thr_pcl(const std::vector<Eigen::Vector3f>& points, const st
 
         std::vector<double> distances;
 
-        std::cout<<"I am Alive 2"<<'\n';
-        std::cout<<vertices_.size()<<"\n";
+        
 
         for (auto const &pl : vertices_) {
             distances.push_back(std::abs(pl.dist(p)));
         }
 
-        std::cout<<"I am Alive 3"<<'\n';
+        //std::cout<<"I am Alive 3"<<'\n';
 
 
         std::vector<size_t> idx = sort_indices<double>(distances);
         bool plane = false;
         double inv_threshold = 1. / dist_threshold_;
-        std::cout<<"I am Alive 4"<<'\n';
-        std::cout<<idx.size()<<'\n';
+       // std::cout<<"I am Alive 4"<<'\n';
+       // std::cout<<idx.size()<<'\n';
+
+        if(idx.size()>0){
         if (distances[idx[0]] < dist_threshold_) {
-            std::cout<<"I am Alive 5"<<'\n';
+           // std::cout<<"I am Alive 5"<<'\n';
             Vec3 n_plane = vertices_[idx[0]].n();
 
-            std::cout<<"I am Alive 6"<<'\n';
+           // std::cout<<"I am Alive 6"<<'\n';
+
             if (std::abs(n.dot(n_plane)) > normal_threshold_) {
                 // accept point as belonging to closest plane
                 double t = 1. - distances[idx[0]] * inv_threshold; // 0 <= t <= 1 TODO: make more efficient
@@ -314,10 +319,15 @@ void PlaneGraph::go_thr_pcl(const std::vector<Eigen::Vector3f>& points, const st
                 labeled[k].segment<3>(3) = t * n_plane.cast<float>();
                 plane = true;
                 ++counter;
+               // std::cout<<"I am Alive 7 Varianta 1"<<'\n';
             }
             else if (distances[idx[1]] < dist_threshold_) {
+               // std::cout<<"I am Alive 7 Varianta 2"<<'\n';
                 n_plane = vertices_[idx[1]].n();
+                // std::cout<<"I am Alive 8"<<'\n';
+                
                 if (std::abs(n.dot(n_plane)) > normal_threshold_) {
+                    //std::cout<<"I am Alive 11 Varianta 1"<<'\n';
                     // accept point as belonging to second closest plane
                     double t = 1. - distances[idx[1]] * inv_threshold; // 0 <= t <= 1 TODO: make more efficient
                     labeled[k].segment<3>(0) = points[k];
@@ -325,7 +335,10 @@ void PlaneGraph::go_thr_pcl(const std::vector<Eigen::Vector3f>& points, const st
                     plane = true;
                     ++counter_line;
                 }
-                else if (distances[idx[2]] < dist_threshold_ && std::abs(n.dot(vertices_[idx[2]].n())) > normal_threshold_) {
+                else 
+                if ( idx.size()>2){
+                if (distances[idx[2]] < dist_threshold_ && std::abs(n.dot(vertices_[idx[2]].n())) > normal_threshold_ ) {
+                    //std::cout<<"I am Alive 11 Varianta 2"<<'\n';
                     n_plane = vertices_[idx[2]].n();
                     // accept point as belonging to third closest plane
                     double t = 1. - distances[idx[2]] * inv_threshold; // 0 <= t <= 1 TODO: make more efficient
@@ -334,6 +347,7 @@ void PlaneGraph::go_thr_pcl(const std::vector<Eigen::Vector3f>& points, const st
                     plane = true;
                     ++counter_corner;
                 }
+                }
             }
         }
         if (!plane) {
@@ -341,7 +355,8 @@ void PlaneGraph::go_thr_pcl(const std::vector<Eigen::Vector3f>& points, const st
             labeled[k].segment<3>(0) = points[k];
             labeled[k].segment<3>(3) = Eigen::Vector3f::Zero();
         }
-    }        //! for each point
+    }   
+    }     //! for each point
 
     std::cout << counter << "\tpoints on closest plane," << std::endl
     << counter_line << "\tpoints on line," << std::endl

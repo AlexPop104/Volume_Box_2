@@ -213,16 +213,16 @@ public:
     
     redMap.refine_coarse_fine(points, normals, lambda, pairDet.distance_bin(), sampling);
     
-    redMap.print_info();
-    redMap.print_parameters();
-    redMap.print_edges();
+    //redMap.print_info();
+   // redMap.print_parameters();
+    //redMap.print_edges();
     
     
     redMap.filter_outliers(points, normals, pairDet.distance_bin(), .5*sampling);
     
-    redMap.print_info();
-    redMap.print_parameters();
-    redMap.print_edges();
+   // redMap.print_info();
+   // redMap.print_parameters();
+   // redMap.print_edges();
 
     //
      // MUST ADD CHECK HERE
@@ -232,15 +232,15 @@ public:
      PlaneGraph finalMap = PlaneGraph::from_ppg(redMap, 2*pairDet.para_thresh()*pairDet.para_thresh()-1, pairDet.distance_bin()); // double angle
       std::vector<Eigen::Matrix<float, 6, 1>> labeled;   
 
-      std::cout<<"I AM ALIVE"<<"\n";
-      std::cout<<labeled.size()<<"\n";
+      //std::cout<<"I AM ALIVE"<<"\n";
+      //std::cout<<labeled.size()<<"\n";
 
       finalMap.go_thr_pcl(points, normals, labeled);
 
        std::vector<Vec6> lines;
 // //    // line extraction and visualization
 
-      std::cout<<"I am ALive n"<<"\n";
+     // std::cout<<"I am ALive n"<<"\n";
  
        lines = finalMap.extract_lines(points, normals);
    

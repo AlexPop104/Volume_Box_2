@@ -84,7 +84,7 @@ void ParallelPlaneGraph::refine(const std::vector<Eigen::Vector3f>& points, cons
     ceres::Solver::Summary summary;
     
     ceres::Solve(options, &problem, &summary);
-    std::cout << summary.BriefReport() << std::endl;
+    //std::cout << summary.BriefReport() << std::endl;
     
     return;
 }
