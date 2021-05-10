@@ -19,7 +19,7 @@
 #include <pcl/point_types.h>
 #include <visualization_msgs/Marker.h>
 
-#include <orthogonal-planes/compute_volume_nodeConfig.h>
+#include <ppfplane/compute_volume_nodeConfig.h>
 #include <dynamic_reconfigure/server.h>
 #include "std_msgs/String.h"
 
@@ -1556,73 +1556,73 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
         p = t + 1;
       }
     }
-    if (p >= 2)
-    {
-      check_passthrough_limits_x_min(cloud_final,
-                               threshold_x,
-                               threshold_y,
-                               threshold_z,
-                               z_lower_limit,
-                               z_upper_limit,
-                               y_lower_limit,
-                               y_upper_limit,
-                               x_lower_limit,
-                               x_upper_limit,
-                               minimum_nr_points,
-                               x_min_nr_points,
-                               cloud_proximitate_x_min);
+    // if (p >= 2)
+    // {
+    //   check_passthrough_limits_x_min(cloud_final,
+    //                            threshold_x,
+    //                            threshold_y,
+    //                            threshold_z,
+    //                            z_lower_limit,
+    //                            z_upper_limit,
+    //                            y_lower_limit,
+    //                            y_upper_limit,
+    //                            x_lower_limit,
+    //                            x_upper_limit,
+    //                            minimum_nr_points,
+    //                            x_min_nr_points,
+    //                            cloud_proximitate_x_min);
 
-      cloud_proximitate=cloud_proximitate+cloud_proximitate_x_min;
+    //   cloud_proximitate=cloud_proximitate+cloud_proximitate_x_min;
 
-      check_passthrough_limits_x_max(cloud_final,
-                               threshold_x,
-                               threshold_y,
-                               threshold_z,
-                               z_lower_limit,
-                               z_upper_limit,
-                               y_lower_limit,
-                               y_upper_limit,
-                               x_lower_limit,
-                               x_upper_limit,
-                               minimum_nr_points,
-                               x_max_nr_points,
-                               cloud_proximitate_x_max);
+    //   check_passthrough_limits_x_max(cloud_final,
+    //                            threshold_x,
+    //                            threshold_y,
+    //                            threshold_z,
+    //                            z_lower_limit,
+    //                            z_upper_limit,
+    //                            y_lower_limit,
+    //                            y_upper_limit,
+    //                            x_lower_limit,
+    //                            x_upper_limit,
+    //                            minimum_nr_points,
+    //                            x_max_nr_points,
+    //                            cloud_proximitate_x_max);
 
-      cloud_proximitate+=cloud_proximitate_x_max;
+    //   cloud_proximitate+=cloud_proximitate_x_max;
 
-      check_passthrough_limits_y_min(cloud_final,
-                               threshold_x,
-                               threshold_y,
-                               threshold_z,
-                               z_lower_limit,
-                               z_upper_limit,
-                               y_lower_limit,
-                               y_upper_limit,
-                               x_lower_limit,
-                               x_upper_limit,
-                               minimum_nr_points,
-                               y_min_nr_points,
-                               cloud_proximitate_y_min);
+    //   check_passthrough_limits_y_min(cloud_final,
+    //                            threshold_x,
+    //                            threshold_y,
+    //                            threshold_z,
+    //                            z_lower_limit,
+    //                            z_upper_limit,
+    //                            y_lower_limit,
+    //                            y_upper_limit,
+    //                            x_lower_limit,
+    //                            x_upper_limit,
+    //                            minimum_nr_points,
+    //                            y_min_nr_points,
+    //                            cloud_proximitate_y_min);
 
-      cloud_proximitate+=cloud_proximitate_y_min;
+    //   cloud_proximitate+=cloud_proximitate_y_min;
 
-      check_passthrough_limits_y_max(cloud_final,
-                               threshold_x,
-                               threshold_y,
-                               threshold_z,
-                               z_lower_limit,
-                               z_upper_limit,
-                               y_lower_limit,
-                               y_upper_limit,
-                               x_lower_limit,
-                               x_upper_limit,
-                               minimum_nr_points,
-                               y_max_nr_points,
-                               cloud_proximitate_y_max);
+    //   check_passthrough_limits_y_max(cloud_final,
+    //                            threshold_x,
+    //                            threshold_y,
+    //                            threshold_z,
+    //                            z_lower_limit,
+    //                            z_upper_limit,
+    //                            y_lower_limit,
+    //                            y_upper_limit,
+    //                            x_lower_limit,
+    //                            x_upper_limit,
+    //                            minimum_nr_points,
+    //                            y_max_nr_points,
+    //                            cloud_proximitate_y_max);
 
-      cloud_proximitate+=cloud_proximitate_y_max;
+    //   cloud_proximitate+=cloud_proximitate_y_max;
 
-    }
+    // }
 
     if (p == 2)
     {  /*
@@ -1654,15 +1654,6 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
                           perp_ok);
 
 
-    
-
-
-    /*
-      if (paral_ok)
-      {
-        compute_volume_1_plane(coefficients_floor, all_planes[1], Volum);
-      }
-    */
     }
 
     if (p == 3)
@@ -1870,20 +1861,20 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
     float score3;
     float score4;
 
-    score1=score_passthrough_side(p,cloud_proximitate_x_min,minimum_nr_points)+
-          score_passthrough_side(p,cloud_proximitate_x_max,minimum_nr_points)+
-          score_passthrough_side(p,cloud_proximitate_y_min,minimum_nr_points)+
-          score_passthrough_side(p,cloud_proximitate_y_max,minimum_nr_points);
-    std::cout<<"Score 1:"<<score1<<'\n';
+    // score1=score_passthrough_side(p,cloud_proximitate_x_min,minimum_nr_points)+
+    //       score_passthrough_side(p,cloud_proximitate_x_max,minimum_nr_points)+
+    //       score_passthrough_side(p,cloud_proximitate_y_min,minimum_nr_points)+
+    //       score_passthrough_side(p,cloud_proximitate_y_max,minimum_nr_points);
+    // std::cout<<"Score 1:"<<score1<<'\n';
 
-    score2=score_angle(p,1,cos_angle_u1,angle)+
-           score_angle(p,2,cos_angle_u2,angle);
+    // score2=score_angle(p,1,cos_angle_u1,angle)+
+    //        score_angle(p,2,cos_angle_u2,angle);
 
-    std::cout<<"Score 2:"<<score2<<'\n';
+    // std::cout<<"Score 2:"<<score2<<'\n';
   }
 
   void
-  dynReconfCallback(pcl_tutorial::compute_volume_nodeConfig &config, uint32_t level)
+  dynReconfCallback(ppfplane::compute_volume_nodeConfig &config, uint32_t level)
   {
     selection_camera = config.selection_camera;
 
@@ -2004,10 +1995,11 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
     std::stringstream ss_camera;
     std::stringstream header_camera;
 
-    if (selection_camera < 1.5)
+    if (selection_camera < 1.5) 
     {
       ss_camera << "Openni";
-      header_camera << "camera_depth_optical_frame";
+      //header_camera << "camera_depth_optical_frame";
+      header_camera << "base_link";
     }
     else
     {
@@ -2147,7 +2139,7 @@ private:
   bool paral_ok;
   bool perp_ok;
 
-  dynamic_reconfigure::Server<pcl_tutorial::compute_volume_nodeConfig> config_server_;
+  dynamic_reconfigure::Server<ppfplane::compute_volume_nodeConfig> config_server_;
 
   double nivel_initial;
   double dividing_number;

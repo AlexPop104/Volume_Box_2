@@ -213,27 +213,38 @@ public:
     
     redMap.refine_coarse_fine(points, normals, lambda, pairDet.distance_bin(), sampling);
     
-//     // //redMap.print_info();
-//     // //redMap.print_parameters();
-//     // //redMap.print_edges();
+    redMap.print_info();
+    redMap.print_parameters();
+    redMap.print_edges();
     
     
     redMap.filter_outliers(points, normals, pairDet.distance_bin(), .5*sampling);
     
-//     // //redMap.print_info();
-//     // //redMap.print_parameters();
-//     // //redMap.print_edges();
+    redMap.print_info();
+    redMap.print_parameters();
+    redMap.print_edges();
+
+    //
+     // MUST ADD CHECK HERE
+
+    ////
 
      PlaneGraph finalMap = PlaneGraph::from_ppg(redMap, 2*pairDet.para_thresh()*pairDet.para_thresh()-1, pairDet.distance_bin()); // double angle
-      std::vector<Eigen::Matrix<float, 6, 1>> labeled;    
+      std::vector<Eigen::Matrix<float, 6, 1>> labeled;   
+
+      std::cout<<"I AM ALIVE"<<"\n";
+      std::cout<<labeled.size()<<"\n";
+
       finalMap.go_thr_pcl(points, normals, labeled);
 
        std::vector<Vec6> lines;
 // //    // line extraction and visualization
+
+      std::cout<<"I am ALive n"<<"\n";
  
        lines = finalMap.extract_lines(points, normals);
    
-      std::cout << lines.size() << " lines found." << std::endl;
+      std::cout << lines.size() /2<< " lines found." << std::endl;
 
      std::vector<Vec6> new_lines;
 
@@ -301,9 +312,9 @@ public:
                 std::cout<< lines[j][0]<<" "<<lines[j][1]<<" "<<lines[j][2]<<" "<<lines[j][3]<<" "<<lines[j][4]<<" "<<lines[j][5]<<" "<<'\n';
                 std::cout<< lines[k][0]<<" "<<lines[k][1]<<" "<<lines[k][2]<<" "<<lines[k][3]<<" "<<lines[k][4]<<" "<<lines[k][5]<<" "<<'\n';
                 */
-                double latura_i = sqrt (  (lines[i][0]-lines[i][3])*(lines[i][0]-lines[i][3])  +  (lines[i][1]-lines[i][4])*(lines[i][1]-lines[i][4]) +(lines[i][2]-lines[i][5])*(lines[i][2]-lines[i][5])   );
-                double latura_j = sqrt (  (lines[j][0]-lines[j][3])*(lines[j][0]-lines[j][3])  +  (lines[j][1]-lines[j][4])*(lines[j][1]-lines[j][4]) +(lines[j][2]-lines[j][5])*(lines[j][2]-lines[j][5])   );
-                double latura_k = sqrt (  (lines[k][0]-lines[k][3])*(lines[k][0]-lines[k][3])  +  (lines[k][1]-lines[k][4])*(lines[k][1]-lines[k][4]) +(lines[k][2]-lines[k][5])*(lines[k][2]-lines[k][5])   );
+                double latura_i = sqrt (  (lines[i][0]-lines[i][3])*(lines[i][0]-lines[i][3])  +  (lines[i][1]-lines[i][4])*(lines[i][1]-lines[i][4]) +(lines[i][2]-lines[i][5])*(lines[i][2]-lines[i][5])   ) +0.02;
+                double latura_j = sqrt (  (lines[j][0]-lines[j][3])*(lines[j][0]-lines[j][3])  +  (lines[j][1]-lines[j][4])*(lines[j][1]-lines[j][4]) +(lines[j][2]-lines[j][5])*(lines[j][2]-lines[j][5])   ) +0.02;
+                double latura_k = sqrt (  (lines[k][0]-lines[k][3])*(lines[k][0]-lines[k][3])  +  (lines[k][1]-lines[k][4])*(lines[k][1]-lines[k][4]) +(lines[k][2]-lines[k][5])*(lines[k][2]-lines[k][5])   ) +0.02;
 
                 double Volum = latura_i*latura_j*latura_k;
                  
@@ -471,7 +482,8 @@ public:
 
 
    std::stringstream header_camera;
-    header_camera << "camera_depth_optical_frame";
+    //header_camera << "camera_depth_optical_frame";
+    header_camera << "base_link";
 
     sensor_msgs::PointCloud2 tempROSMsg;
     pcl::toROSMsg(*points_all_lines, tempROSMsg);
@@ -484,7 +496,7 @@ public:
     pcl::toROSMsg(*points_final_lines, tempROSMsg2);
 
     
-    tempROSMsg.header.frame_id = header_camera.str();
+    tempROSMsg2.header.frame_id = header_camera.str();
     pub2_.publish(tempROSMsg2);
 
 

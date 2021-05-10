@@ -286,14 +286,27 @@ void PlaneGraph::go_thr_pcl(const std::vector<Eigen::Vector3f>& points, const st
         Vec3 n = normals[k].cast<double>();
 
         std::vector<double> distances;
+
+        std::cout<<"I am Alive 2"<<'\n';
+        std::cout<<vertices_.size()<<"\n";
+
         for (auto const &pl : vertices_) {
             distances.push_back(std::abs(pl.dist(p)));
         }
+
+        std::cout<<"I am Alive 3"<<'\n';
+
+
         std::vector<size_t> idx = sort_indices<double>(distances);
         bool plane = false;
         double inv_threshold = 1. / dist_threshold_;
+        std::cout<<"I am Alive 4"<<'\n';
+        std::cout<<idx.size()<<'\n';
         if (distances[idx[0]] < dist_threshold_) {
+            std::cout<<"I am Alive 5"<<'\n';
             Vec3 n_plane = vertices_[idx[0]].n();
+
+            std::cout<<"I am Alive 6"<<'\n';
             if (std::abs(n.dot(n_plane)) > normal_threshold_) {
                 // accept point as belonging to closest plane
                 double t = 1. - distances[idx[0]] * inv_threshold; // 0 <= t <= 1 TODO: make more efficient
