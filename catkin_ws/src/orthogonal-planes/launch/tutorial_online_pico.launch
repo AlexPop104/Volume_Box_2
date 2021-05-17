@@ -1,5 +1,5 @@
 <launch>
- <node pkg="pcl_tutorial" type="voxel_filter_node" name="voxel_filter_node" output="screen" >
+ <!-- <node pkg="pcl_tutorial" type="voxel_filter_node" name="voxel_filter_node" output="screen" >
 <remap from="point_cloud_in" to="/pico_zense/depth/points" />
 </node>
 
@@ -17,10 +17,12 @@
 </node>
 
  <node pkg="pcl_tutorial" type="compute_volume_node" name="compute_volume_node" output="screen">
+</node> -->
+
+<node pkg="ppfplane" type="line_detect_node" name="line_detect_node" output="screen">
 </node>
 
-
- <node pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find pcl_tutorial)/cfg/rviz.rviz"/>
+ <node pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find ppfplane)/cfg/rviz.rviz"/>
 
  <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" output="screen" />
 

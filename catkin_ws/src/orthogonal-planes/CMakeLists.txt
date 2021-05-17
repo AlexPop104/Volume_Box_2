@@ -59,6 +59,7 @@ generate_dynamic_reconfigure_options(
   cfg/compute_volume_node.cfg
   cfg/compute_surface_normals_node.cfg
   cfg/line_detect_node.cfg
+  cfg/compute_volume_node_2.cfg
 )
 
 
@@ -117,6 +118,8 @@ add_executable(passthrough_filter_node src/passthrough_filter_node.cpp)
 add_executable(plane_segmentation_node src/plane_segmentation_node.cpp)
 add_executable(trianglemesh_node src/trianglemesh_node.cpp)
 add_executable(compute_volume_node src/compute_volume_node.cpp)
+
+add_executable(compute_volume_node_2 src/compute_volume_node_2.cpp)
 add_executable(compute_surface_normals_node src/compute_surface_normals_node.cpp)
 add_executable(Lines_node src/Lines_node.cpp)
 add_executable(line_detect_node ply_detect_refine/src/main.cpp)
@@ -129,6 +132,7 @@ target_link_libraries(trianglemesh_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} $
 target_link_libraries(compute_volume_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(compute_surface_normals_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
 target_link_libraries(Lines_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(compute_volume_node_2 ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES})
 
 target_link_libraries(line_detect_node ${catkin_LIBRARIES} ${Boost_LIBRARIES} ${PCL_LIBRARIES} ${PLY_PPDetectRefine} tinyply
 vis_lib # links to Pangolin_LIBRARIES
@@ -144,6 +148,8 @@ add_dependencies(compute_volume_node ${PROJECT_NAME}_gencfg)
 add_dependencies(compute_surface_normals_node ${PROJECT_NAME}_gencfg)
 add_dependencies(Lines_node ${PROJECT_NAME}_gencfg)
 add_dependencies(line_detect_node ${PROJECT_NAME}_gencfg)
+
+add_dependencies(compute_volume_node_2 ${PROJECT_NAME}_gencfg)
 
 
 

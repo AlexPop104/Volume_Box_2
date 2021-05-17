@@ -19,7 +19,7 @@
 #include <pcl/point_types.h>
 #include <visualization_msgs/Marker.h>
 
-#include <ppfplane/compute_volume_nodeConfig.h>
+#include <ppfplane/compute_volume_node_2Config.h>
 #include <dynamic_reconfigure/server.h>
 #include "std_msgs/String.h"
 
@@ -1876,7 +1876,7 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
   }
 
   void
-  dynReconfCallback(ppfplane::compute_volume_nodeConfig &config, uint32_t level)
+  dynReconfCallback(ppfplane::compute_volume_node_2Config &config, uint32_t level)
   {
     selection_camera = config.selection_camera;
 
@@ -2151,7 +2151,7 @@ private:
   bool paral_ok;
   bool perp_ok;
 
-  dynamic_reconfigure::Server<ppfplane::compute_volume_nodeConfig> config_server_;
+  dynamic_reconfigure::Server<ppfplane::compute_volume_node_2Config> config_server_;
 
   double nivel_initial;
   double dividing_number;

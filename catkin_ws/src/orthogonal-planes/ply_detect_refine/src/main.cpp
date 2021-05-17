@@ -134,6 +134,8 @@ public:
   cloudCallback(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
   {
 
+    std::ofstream log("/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/Volumes.txt", std::ios_base::app | std::ios_base::out);
+
     std::stringstream ss;
     pcl::PointCloud<pcl::PointNormal> cloud_Test;
     pcl::fromROSMsg(*cloud_msg, cloud_Test);
@@ -387,6 +389,8 @@ public:
 
      
     if (new_lines.size()>=3){
+
+      log<<"New Volume"<<'\n';
        for(int i = 0; i < new_lines.size(); i=i+3) {
       bool ok_position=1;
 
@@ -406,6 +410,10 @@ public:
         final_lines.push_back(new_lines[i+2]);
         std::cout<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3"<<'\n';
         ss<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3"<<'\n';
+
+        log<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3 "<< ros::Time::now()<<'\n';
+
+        log<<'\n';
        
 
         std::cout<< "distance1= "<<Volume_edge[i] <<" m"<<'\n';
@@ -483,7 +491,8 @@ public:
 
    std::stringstream header_camera;
     //header_camera << "camera_depth_optical_frame";
-    header_camera << "base_link";
+    header_camera << "pico_zense_depth_frame";
+    //header_camera << "base_link";
 
     sensor_msgs::PointCloud2 tempROSMsg;
     pcl::toROSMsg(*points_all_lines, tempROSMsg);
@@ -552,7 +561,14 @@ private:
  */
 int main(int argc, char** argv) {
 
+
    ros::init (argc, argv, "line_detect_node");
+  
+
+   
+
+   
+   
 
    LineDetectNode ldn;
 

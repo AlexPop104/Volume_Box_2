@@ -17,14 +17,14 @@
 <node pkg="ppfplane" type="compute_surface_normals_node" name="compute_surface_normals_node" output="screen">
 </node>
 
- <!-- <node pkg="ppfplane" type="line_detect_node" name="line_detect_node" output="screen">
-</node> -->
+ <node pkg="ppfplane" type="line_detect_node" name="line_detect_node" output="screen">
+</node>
 
  <node pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find ppfplane)/cfg/rviz.rviz"/>
 
  <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" output="screen" />
 
- <node pkg="pcl_ros" type="pcd_to_pointcloud" name="pcd_to_pointcloud" output="screen" args=" $(find ppfplane)/data/box_3_2.pcd 1" />
+ <node pkg="pcl_ros" type="pcd_to_pointcloud" name="pcd_to_pointcloud" output="screen" args=" $(find ppfplane)/data/box_2_1.pcd 1" />
 
 
 </launch>

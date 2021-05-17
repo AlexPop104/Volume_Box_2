@@ -148,6 +148,8 @@ public:
     if(cloudPTR->size() >0){
     compute_surface_normals(cloudPTR,radius_norm,cloudnormals);
 
+    pcl_conversions::toPCL(ros::Time::now(), cloudnormals.header.stamp);
+
     std::stringstream header_camera;
     header_camera << "camera_depth_optical_frame";
 
