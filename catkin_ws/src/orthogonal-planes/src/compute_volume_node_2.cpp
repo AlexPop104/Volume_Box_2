@@ -68,7 +68,7 @@ public:
     pub4_ = nh_.advertise<sensor_msgs::PointCloud2>("/Cutof_Object_points", 1);
     pub5_ = nh_.advertise<sensor_msgs::PointCloud2>("/Planes_wrong_angle", 1);
 
-    sub_ = nh_.subscribe("/pf_out", 1, &ComputeVolumeNode::cloudCallback, this);
+    sub_ = nh_.subscribe("/norm_out", 1, &ComputeVolumeNode::cloudCallback, this);
 
     config_server_.setCallback(boost::bind(&ComputeVolumeNode::dynReconfCallback, this, _1, _2));
 
@@ -138,6 +138,10 @@ public:
     Coeficients[3 - (i - 1) - (j - 1)][1] = b3;
     Coeficients[3 - (i - 1) - (j - 1)][2] = c3;
     Coeficients[3 - (i - 1) - (j - 1)][3] = -d3;
+
+    if ( (a3==0)||(b3==0)||(c3==0)||(d3==0)){
+      std::cout<<"Planar 0"<<'\n';
+    }
   }
 
   void euclidean_segmenting(pcl::PointCloud<pcl::PointXYZ>::Ptr cloud,
@@ -1659,19 +1663,19 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
     if (p == 3)
     {
 
-    compute_angle(all_planes,
-                   Coeficients,
-                   1,
-                  angle,
-                  cos_angle_u1,
-                  cloud_wrong_angle);
+    // compute_angle(all_planes,
+    //                Coeficients,
+    //                1,
+    //               angle,
+    //               cos_angle_u1,
+    //               cloud_wrong_angle);
 
-    compute_angle(all_planes,
-                   Coeficients,
-                   2,
-                  angle,
-                  cos_angle_u2,
-                  cloud_wrong_angle);
+    // compute_angle(all_planes,
+    //                Coeficients,
+    //                2,
+    //               angle,
+    //               cos_angle_u2,
+    //               cloud_wrong_angle);
 
 
 
@@ -1735,19 +1739,19 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
     if (p == 4)
     {
       
-      compute_angle(all_planes,
-                   Coeficients,
-                   1,
-                  angle,
-                  cos_angle_u1,
-                  cloud_wrong_angle);
+    //   compute_angle(all_planes,
+    //                Coeficients,
+    //                1,
+    //               angle,
+    //               cos_angle_u1,
+    //               cloud_wrong_angle);
 
-    compute_angle(all_planes,
-                   Coeficients,
-                   2,
-                  angle,
-                  cos_angle_u2,
-                  cloud_wrong_angle);
+    // compute_angle(all_planes,
+    //                Coeficients,
+    //                2,
+    //               angle,
+    //               cos_angle_u2,
+    //               cloud_wrong_angle);
       /*
       compute_angle(all_planes,
                    Coeficients,
@@ -1962,26 +1966,55 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_proiectii(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_linii(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_floor(new pcl::PointCloud<pcl::PointXYZ>);
-    pcl::PointCloud<pcl::PointXYZ> cloud_Test;
-    pcl::fromROSMsg(*cloud_msg, cloud_Test);
+    //pcl::PointCloud<pcl::PointXYZ> cloud_Test;
+    //pcl::fromROSMsg(*cloud_msg, cloud_Test);
 
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_plan_1(new pcl::PointCloud<pcl::PointXYZ>);
     pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_plan_2(new pcl::PointCloud<pcl::PointXYZ>);
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloudPTR(new pcl::PointCloud<pcl::PointXYZ>);
-    *cloudPTR = cloud_Test;
+    //pcl::PointCloud<pcl::PointXYZ>::Ptr cloudPTR(new pcl::PointCloud<pcl::PointXYZ>);
+    //*cloudPTR = cloud_Test;
 
     pcl::PointCloud<pcl::PointXYZ> cloud_passthrough_thresshold;
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_wrong_angle(new pcl::PointCloud<pcl::PointXYZ>);
+
+
+    pcl::PointCloud<pcl::PointNormal> cloud_Test;
+    pcl::fromROSMsg(*cloud_msg, cloud_Test);
+    
+    pcl::PointCloud<pcl::PointNormal>::Ptr cloudPTR_normals(new pcl::PointCloud<pcl::PointNormal>);
+    *cloudPTR_normals = cloud_Test;
+
+    pcl::PointCloud<pcl::PointXYZ>::Ptr cloudPTR(new pcl::PointCloud<pcl::PointXYZ>);
+
+
+    if(cloudPTR_normals->size()>0)
+    {
+    for (int i = 0; i < cloudPTR_normals->size(); i++)
+    {
+      
+      
+      cloudPTR->points.push_back( pcl::PointXYZ(cloudPTR_normals->points[i].x,cloudPTR_normals->points[i].y ,cloudPTR_normals->points[i].z));
+      
+    }
+    
+    cloudPTR->width = cloudPTR->points.size();
+   
+    cloudPTR->height = 1;
+    cloudPTR->points.resize(cloudPTR->width * cloudPTR->height);
+    cloudPTR->is_dense = false;
+
+
 
     cloud_passthrough_thresshold.width = 0;
     cloud_passthrough_thresshold.height = 1;
     cloud_passthrough_thresshold.is_dense = false;
     cloud_passthrough_thresshold.resize(cloud_passthrough_thresshold.width * cloud_passthrough_thresshold.height);
 
-    pcl::PointCloud<pcl::PointXYZ>::Ptr cloud_wrong_angle(new pcl::PointCloud<pcl::PointXYZ>);
+    
 
     compute_all(cloudPTR, cloud_floor, cloud_final, cloud_proiectii, cloud_linii, Volum, p, perp_ok, paral_ok, cloud_passthrough_thresshold,cloud_wrong_angle);
-
+    }
     sensor_msgs::PointCloud2 tempROSMsg;
     sensor_msgs::PointCloud2 tempROSMsg2;
     sensor_msgs::PointCloud2 tempROSMsg3;

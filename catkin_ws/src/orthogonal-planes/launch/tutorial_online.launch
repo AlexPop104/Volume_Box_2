@@ -17,18 +17,18 @@
 </node> -->
 
 
-<!-- 
- <node pkg="ppfplane" type="compute_surface_normals_node" name="compute_surface_normals_node" output="screen">
+
+ <!-- <node pkg="ppfplane" type="compute_surface_normals_node" name="compute_surface_normals_node" output="screen">
 </node> -->
 
  <!-- <node pkg="ppfplane" type="line_detect_node" name="line_detect_node" output="screen">
 </node> -->
 
- <!-- <node pkg="ppfplane" type="compute_volume_node" name="compute_volume_node" output="screen">
-</node> -->
-
-<node pkg="ppfplane" type="compute_volume_node_2" name="compute_volume_node" output="screen">
+ <node pkg="ppfplane" type="compute_volume_node" name="compute_volume_node" output="screen">
 </node>
+
+<!-- <node pkg="ppfplane" type="compute_volume_node_2" name="compute_volume_node_2" output="screen">
+</node> -->
 
 
 
