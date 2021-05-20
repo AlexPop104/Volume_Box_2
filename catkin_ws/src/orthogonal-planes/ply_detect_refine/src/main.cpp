@@ -258,6 +258,10 @@ public:
      std::vector<int> positions_wrong;
      std::vector<double> Volumes;
 
+     std::vector<Vec3> Corner_points;
+
+     std::vector<double> Distances_corner;
+
    
 
      std::cout<<'\n';
@@ -338,6 +342,18 @@ public:
                 Volumes.push_back(Volum);
                 Volumes.push_back(Volum);
                 Volumes.push_back(Volum);
+
+               // std::cout<<"Point corner:"<<average_0<<" "<<average_1<<" "<<average_2;
+
+                Corner_points.push_back(Vec3(average_0,average_1,average_2));
+                Corner_points.push_back(Vec3(average_0,average_1,average_2));
+                Corner_points.push_back(Vec3(average_0,average_1,average_2));
+
+                double dist_corner= sqrt(average_0*average_0 + average_1*average_1 +average_2*average_2);
+
+                Distances_corner.push_back(dist_corner);
+                Distances_corner.push_back(dist_corner);
+                Distances_corner.push_back(dist_corner);
               }
 
               }
@@ -419,6 +435,11 @@ public:
         std::cout<< "distance1= "<<Volume_edge[i] <<" m"<<'\n';
         std::cout<< "distance2= "<<Volume_edge[i+1]<<" m" <<'\n';
         std::cout<< "distance3= "<<Volume_edge[i+2]<<" m" <<'\n';
+
+        std::cout<<'\n';
+        std::cout<<"Final corner point"<<Corner_points[i][0]<<" "<<Corner_points[i][1]<<" "<<Corner_points[i][2]<<'\n';
+        std::cout<<"Distance to corner"<<Distances_corner[i]<<'\n';
+       
         
         std::cout<<'\n';
 

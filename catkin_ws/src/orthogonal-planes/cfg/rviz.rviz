@@ -334,7 +334,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: camera_depth_optical_frame
+    Fixed Frame: pico_zense_depth_frame
     Frame Rate: 30
   Name: root
   Tools:
