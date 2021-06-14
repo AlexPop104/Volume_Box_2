@@ -1949,7 +1949,7 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
   cloudCallback(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
   {
 
-    std::ofstream log("/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/Volumes_node.txt", std::ios_base::app | std::ios_base::out);
+    // std::ofstream log("/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/Volumes_node.txt", std::ios_base::app | std::ios_base::out);
 
     float Volum = 1;
     int p = 0;
@@ -2001,15 +2001,24 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
 
     if (selection_camera < 1.5) 
     {
-      ss_camera << "Openni";
-      header_camera << "camera_depth_optical_frame";
-     // header_camera << "base_link";
+      ss_camera << "Base_link";
+      //
+      header_camera << "base_link";
     }
     else
     {
-      ss_camera << "Pico";
-      header_camera << "pico_zense_depth_frame";
+      if  ( (selection_camera < 3) &&(selection_camera > 2) ) 
+      {
+        ss_camera << "Openni";
+        header_camera << "camera_depth_optical_frame";
+      }
+      else{
+        ss_camera << "Pico";
+        header_camera << "pico_zense_depth_frame";
     }
+      }
+      
+      
 
     visualization_msgs::Marker marker_camera;
     marker_camera.header.frame_id = header_camera.str();
@@ -2112,7 +2121,7 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
 
     if(Volum!=1)
     {
-      log<<Volum<<'\n';
+      // log<<Volum<<'\n';
     }
     
 

@@ -1953,7 +1953,7 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
   cloudCallback(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
   {
 
-    std::ofstream log("/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/Volumes_node.txt", std::ios_base::app | std::ios_base::out);
+    // std::ofstream log("/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/Volumes_node.txt", std::ios_base::app | std::ios_base::out);
 
     float Volum = 1;
     int p = 0;
@@ -2145,7 +2145,7 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
 
     if(Volum!=1)
     {
-      log<<Volum<<'\n';
+      // log<<Volum<<'\n';
     }
     
 
