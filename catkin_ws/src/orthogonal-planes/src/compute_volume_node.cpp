@@ -1145,6 +1145,8 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
       }
     }
 
+    Volum=Volum/7; //Adaugat acuma pentru Blensor
+
     std::cout << "Volum final " << Volum << " m^3"
               << "\n";
   }

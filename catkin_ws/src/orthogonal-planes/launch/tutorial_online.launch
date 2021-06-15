@@ -1,10 +1,10 @@
 <launch>
- <!-- <node pkg="ppfplane" type="voxel_filter_node" name="voxel_filter_node" output="screen" >
+  <!-- <node pkg="ppfplane" type="voxel_filter_node" name="voxel_filter_node" output="screen" >
 <remap from="point_cloud_in" to="/camera/depth_registered/points" />
-</node>
+</node> -->
 
 
- <node pkg="ppfplane" type="passthrough_filter_node" name="passthrough_filter_node" output="screen" >
+ <!-- <node pkg="ppfplane" type="passthrough_filter_node" name="passthrough_filter_node" output="screen" >
 <remap from="point_cloud_in" to="/vf_out" />
 </node>  -->
 
@@ -21,13 +21,13 @@
  <!-- <node pkg="ppfplane" type="compute_surface_normals_node" name="compute_surface_normals_node" output="screen">
 </node> -->
 
- <node pkg="ppfplane" type="line_detect_node" name="line_detect_node" output="screen">
-</node>
-
- <!-- <node pkg="ppfplane" type="compute_volume_node" name="compute_volume_node" output="screen">
+ <!-- <node pkg="ppfplane" type="line_detect_node" name="line_detect_node" output="screen">
 </node> -->
 
-<!-- <node pkg="ppfplane" type="compute_volume_node_2" name="compute_volume_node_2" output="screen">
+ <node pkg="ppfplane" type="compute_volume_node" name="compute_volume_node" output="screen">
+</node>
+
+ <!-- <node pkg="ppfplane" type="compute_volume_node_2" name="compute_volume_node_2" output="screen">
 </node> -->
 
 

@@ -86,6 +86,8 @@ ADD_LIBRARY( ${LIB_NAME} /home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Bo
                          /home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/src/orthogonal-planes/include/visualize/pcshow_lines.cpp
                          /home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/src/orthogonal-planes/include/visualize/pcshow_corners.cpp
                           )
+
+
 TARGET_LINK_LIBRARIES( ${LIB_NAME} ${Pangolin_LIBRARIES})
 TARGET_COMPILE_OPTIONS( ${LIB_NAME} PRIVATE -std=c++11 )
 

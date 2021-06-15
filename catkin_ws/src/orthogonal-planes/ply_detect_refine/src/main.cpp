@@ -73,6 +73,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <dynamic_reconfigure/server.h>
 #include "std_msgs/String.h"
 #include <vector>
+#include <cmath>
 
 
 
@@ -88,6 +89,8 @@ public:
   LineDetectNode()
   {
     vis_pub = nh_.advertise<visualization_msgs::Marker>("/Volum_final", 0);
+    vis_pub2 = nh_.advertise<visualization_msgs::Marker>("/Angle_of_Z", 0);
+    vis_pub3 = nh_.advertise<visualization_msgs::Marker>("/Distance_to_Corner", 0);
     pub_ = nh_.advertise<sensor_msgs::PointCloud2>("/lines_all",1);
     pub2_ = nh_.advertise<sensor_msgs::PointCloud2>("/lines_final",1);
     sub_ = nh_.subscribe ("/norm_out", 1,  &LineDetectNode::cloudCallback, this);
@@ -137,6 +140,8 @@ public:
     std::ofstream log("/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/Volumes.txt", std::ios_base::app | std::ios_base::out);
 
     std::stringstream ss;
+    std::stringstream ss2;
+     std::stringstream ss3;
     pcl::PointCloud<pcl::PointNormal> cloud_Test;
     pcl::fromROSMsg(*cloud_msg, cloud_Test);
     
@@ -262,6 +267,10 @@ public:
 
      std::vector<double> Distances_corner;
 
+     std::vector<double> cos_angles;
+
+     std::vector<double> min_angles;
+
    
 
      std::cout<<'\n';
@@ -349,11 +358,55 @@ public:
                 Corner_points.push_back(Vec3(average_0,average_1,average_2));
                 Corner_points.push_back(Vec3(average_0,average_1,average_2));
 
+                /*
                 double dist_corner= sqrt(average_0*average_0 + average_1*average_1 +average_2*average_2);
 
+               
                 Distances_corner.push_back(dist_corner);
                 Distances_corner.push_back(dist_corner);
                 Distances_corner.push_back(dist_corner);
+                */
+
+               double dist_corner= average_2;
+               Distances_corner.push_back(dist_corner);
+                Distances_corner.push_back(dist_corner);
+                Distances_corner.push_back(dist_corner);
+
+               double max_cosine=-300;
+               
+              double cosine_angle_latura_i_point1= ( lines[i][0] * 0 +  lines[i][1] * 0 +lines[i][2] * 1 ) / sqrt( (lines[i][0]*lines[i][0])+(lines[i][1]*lines[i][1])+(lines[i][2]*lines[i][2])  ); cos_angles.push_back(cosine_angle_latura_i_point1);
+              double cosine_angle_latura_i_point2= ( lines[i][3] * 0 +  lines[i][4] * 0 +lines[i][5] * 1 ) / sqrt( (lines[i][3]*lines[i][3])+(lines[i][4]*lines[i][4])+(lines[i][5]*lines[i][5])  );cos_angles.push_back(cosine_angle_latura_i_point2);
+              double cosine_angle_latura_j_point1= ( lines[j][0] * 0 +  lines[j][1] * 0 +lines[j][2] * 1 ) / sqrt( (lines[j][0]*lines[j][0])+(lines[j][1]*lines[j][1])+(lines[j][2]*lines[j][2])  );cos_angles.push_back(cosine_angle_latura_j_point1);
+              double cosine_angle_latura_j_point2= ( lines[j][3] * 0 +  lines[j][4] * 0 +lines[j][5] * 1 ) / sqrt( (lines[j][3]*lines[j][3])+(lines[j][4]*lines[j][4])+(lines[j][5]*lines[j][5])  );cos_angles.push_back(cosine_angle_latura_j_point2);
+              double cosine_angle_latura_k_point1= ( lines[k][0] * 0 +  lines[k][1] * 0 +lines[k][2] * 1 ) / sqrt( (lines[k][0]*lines[k][0])+(lines[k][1]*lines[k][1])+(lines[k][2]*lines[k][2])  );cos_angles.push_back(cosine_angle_latura_k_point1);
+              double cosine_angle_latura_k_point2= ( lines[k][3] * 0 +  lines[k][4] * 0 +lines[k][5] * 1 ) / sqrt( (lines[k][3]*lines[k][3])+(lines[k][4]*lines[k][4])+(lines[k][5]*lines[k][5])  );cos_angles.push_back(cosine_angle_latura_i_point2);
+              double cosine_angle_corner= ( average_0 * 0 +  average_1 * 0 +average_2 * 1 ) / sqrt( (average_0*average_0)+(average_1*average_1)+(average_2*average_2)  );cos_angles.push_back(cosine_angle_corner);
+
+                int position_max_cos=0;
+              //std::cout<<"\n";
+
+              for (int t=0;t<7;t++)
+              {
+
+                //std::cout<<cos_angles[t]<<'\n';
+                if (max_cosine< cos_angles[t])
+                {
+                  max_cosine=cos_angles[t];
+                  position_max_cos=t;
+                  //std::cout<<"New max found, cos max is now "<<max_cosine<<'\n';
+                }
+              }
+
+               //std::cout<<"\n";
+              // std::cout<<"Final max is: "<<max_cosine<<'\n';
+              
+             // std::cout<<"\n";
+               //std::cout<<"Minimal angle is: "<<acos(max_cosine)*180/3.14159<<'\n';
+
+              min_angles.push_back(acos(max_cosine)*180/3.14159);
+              min_angles.push_back(acos(max_cosine)*180/3.14159);
+              min_angles.push_back(acos(max_cosine)*180/3.14159);
+                
               }
 
               }
@@ -439,6 +492,10 @@ public:
         std::cout<<'\n';
         std::cout<<"Final corner point"<<Corner_points[i][0]<<" "<<Corner_points[i][1]<<" "<<Corner_points[i][2]<<'\n';
         std::cout<<"Distance to corner"<<Distances_corner[i]<<'\n';
+        std::cout<<"Minimal angle"<<min_angles[i]<<'\n';
+
+        ss2<<"Minimal angle"<<min_angles[i]<<'\n';
+        ss3<<"Distance to corner"<<Distances_corner[i]<<'\n';
        
         
         std::cout<<'\n';
@@ -512,8 +569,8 @@ public:
 
    std::stringstream header_camera;
     //header_camera << "camera_depth_optical_frame";
-    header_camera << "pico_zense_depth_frame";
-    //header_camera << "base_link";
+    //header_camera << "pico_zense_depth_frame";
+    header_camera << "base_link";
 
     sensor_msgs::PointCloud2 tempROSMsg;
     pcl::toROSMsg(*points_all_lines, tempROSMsg);
@@ -542,6 +599,20 @@ public:
 
     vis_pub.publish(marker);
 
+    visualization_msgs::Marker marker2;
+    marker2.header.frame_id = header_camera.str();
+    marker2.text = ss2.str();
+    set_marker(marker2);
+
+    vis_pub2.publish(marker2);
+
+     visualization_msgs::Marker marker3;
+    marker3.header.frame_id = header_camera.str();
+    marker3.text = ss3.str();
+    set_marker(marker3);
+
+    vis_pub3.publish(marker3);
+
 
     
        
@@ -565,6 +636,8 @@ private:
   ros::Publisher pub_;
   ros::Publisher pub2_;
   ros::Publisher vis_pub;
+  ros::Publisher vis_pub2;
+  ros::Publisher vis_pub3;
   dynamic_reconfigure::Server<ppfplane::line_detect_nodeConfig> config_server_;
 
   int min_votes ;
