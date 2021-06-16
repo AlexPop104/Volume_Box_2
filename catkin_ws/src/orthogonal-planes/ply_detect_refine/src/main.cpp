@@ -137,7 +137,7 @@ public:
   cloudCallback(const sensor_msgs::PointCloud2ConstPtr &cloud_msg)
   {
 
-    std::ofstream log("/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/Volumes.txt", std::ios_base::app | std::ios_base::out);
+    std::ofstream log("/home/alex-pop/Desktop/Doctorat/Side_projects/Volume_Box_2/catkin_ws/Volumes.csv", std::ios_base::app | std::ios_base::out);
 
     std::stringstream ss;
     std::stringstream ss2;
@@ -459,7 +459,7 @@ public:
      
     if (new_lines.size()>=3){
 
-      log<<"New Volume"<<'\n';
+      //log<<"New Volume,"<<'\n';
        for(int i = 0; i < new_lines.size(); i=i+3) {
       bool ok_position=1;
 
@@ -480,9 +480,11 @@ public:
         std::cout<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3"<<'\n';
         ss<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3"<<'\n';
 
-        log<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3 "<< ros::Time::now()<<'\n';
+        //log<<"Volum "<<(i/3)<<": "<<Volumes[i]<<" m^3 "<< ros::Time::now()<<'\n';
 
-        log<<'\n';
+        log<<Volumes[i]<<","<<'\n';
+
+        //log<<'\n';
        
 
         std::cout<< "distance1= "<<Volume_edge[i] <<" m"<<'\n';
