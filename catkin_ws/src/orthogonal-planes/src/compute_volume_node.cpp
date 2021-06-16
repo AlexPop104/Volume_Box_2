@@ -2124,6 +2124,7 @@ void compute_angle( pcl::PointCloud<pcl::PointXYZ>::Ptr all_planes[4],
 
     if(Volum!=1)
     {
+      Volum=Volum/7;  ////  Facut special pentru modelele din Blensor.
       log<<Volum<<","<<'\n';
     }
     
